@@ -10,8 +10,9 @@ void onCrash()
 {
     using std::thread;
     for (int i = 0; i < 10; i++) {
-        thread windowThread(spawnWindow);
+        thread(spawnWindow).detach();
     }
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
 }
 
 int main()
