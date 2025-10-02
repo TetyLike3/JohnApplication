@@ -9,7 +9,7 @@ void spawnWindow()
 void onCrash()
 {
     using std::thread;
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 5; i++) {
         thread(spawnWindow).detach();
     }
     std::this_thread::sleep_for(std::chrono::milliseconds(50));
@@ -26,6 +26,16 @@ int main()
         cout << "Can you give me a number: ";
         auto& result = std::cin >> input;
         if (!result.good()) throw 1;
+        cout << "Thanks!\n";
+
+        int r1 = rand() % 21;
+        int r2 = rand() % 21;
+        std::printf("What is the sum of %i and %i? ",r1,r2);
+        int userResult = 0;
+        std::cin >> userResult;
+        if (!std::cin.good()) throw 1;
+        if (userResult != (r1 + r2)) throw 1;
+        cout << "Yeah!\n";
     }
     catch (...) {
         onCrash();
